@@ -1,0 +1,86 @@
+package seleniumDemo.SeleniumDemo;
+
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
+
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
+public class Usecase2 {
+    WebDriver driver;
+
+    @BeforeMethod
+    public void setUp() {
+        // Set the path to your ChromeDriver executable
+        System.setProperty("webdriver.chrome.driver", "C:\\Users\\Vaishnavi Madrewar\\Downloads\\chromedriver-win32\\chromedriver-win32\\chromedriver.exe");
+
+        // Initialize ChromeDriver
+        driver = new ChromeDriver();
+    }
+
+    @Test
+    public void testClickEachLink() {
+        // Navigate to the webpage
+        driver.get("https://www.rabbitandtortoise.com/4-Dec-2023/index.html");
+        driver.manage().window().maximize();
+
+        Set<String> uniqueLinks = new HashSet<>();
+
+        // Click on all links on the initial page
+        collectLinks(uniqueLinks);
+
+        // Click on the "Generative AI" element
+        //driver.findElement(By.linkText("https://www.rabbitandtortoise.com/4-Dec-2023/domain-telecom.html")).click();
+
+        // Click on all links on the page after clicking "Generative AI"
+        //collectLinks(uniqueLinks);
+    }
+
+    private void collectLinks(Set<String> uniqueLinks) {
+        // Find all the links on the webpage
+        List<WebElement> links = driver.findElements(By.tagName("a"));
+
+        // Store the unique URLs of the links in the set
+        List<String> linkUrls = new ArrayList<>();
+        for (WebElement link : links) {
+            linkUrls.add(link.getAttribute("href"));
+        }
+
+        // Print the total number of links
+        System.out.println("Total number of links: " + linkUrls.size());
+        for (int i = 0; i < linkUrls.size(); i++) {
+            System.out.println((i + 1) + ". " + linkUrls.get(i));
+        // Create a JavascriptExecutor instance
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+
+        // Click on each link by navigating to its URL
+        for (String linkUrl : uniqueLinks) {
+            // Print the link URL
+            System.out.println("Clicking on link: " + linkUrl);
+
+            // Navigate to the link URL
+            driver.get(linkUrl);
+
+            // Optionally, wait for some time or perform other actions after navigating to the link
+            // For example, you can use Thread.sleep or WebDriverWait
+
+            // Navigate back to the original page (assuming you want to go back)
+            driver.navigate().back();
+        }}
+    }
+
+    @AfterMethod
+    public void tearDown() {
+        // Close the browser
+        driver.quit();
+    }
+}

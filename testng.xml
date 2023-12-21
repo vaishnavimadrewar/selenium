@@ -1,0 +1,12 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="TestSuite" parallel="classes">
+        <test name="Test1">
+        
+        <classes>
+            <class name="seleniumDemo.SeleniumDemo.TestTestNG"/>
+            <class name="seleniumDemo.SeleniumDemo.AutomationTestNG"/>
+                
+            
+        </classes>
+    </test>
+</suite>
