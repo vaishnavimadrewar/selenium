@@ -70,6 +70,5 @@ public class Test2 {
         for (int i = 0; i < linksOnNewPage.size(); i++) {
             System.out.println((i + 1) + ". " + linksOnNewPage.get(i).getAttribute("href"));
         }
-
-        // Continue with other operations on the new page
-    }}
+    }
+    }
