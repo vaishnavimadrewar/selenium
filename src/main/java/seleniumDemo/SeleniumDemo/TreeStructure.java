@@ -53,8 +53,11 @@ class Tree {
 }
 
 public class TreeStructure {
-    public static void main(String[] args) {
-        Tree tree = new Tree("Main");
+    public void treeTest() {
+    	
+        Tree tree = new Tree("https://www.rabbitandtortoise.com/4-Dec-2023/index.html");
+        
+        
         MyTreeNode jane = new MyTreeNode("1");
         MyTreeNode bill = new MyTreeNode("2");
         MyTreeNode diane = new MyTreeNode("sub1");

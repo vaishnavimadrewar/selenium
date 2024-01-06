@@ -64,18 +64,12 @@ public class WebsiteRNT {
 
             // Navigate back to the original page (assuming you want to go back)
             driver.navigate().back();
-            
-            
+                
         }
-		
-		
-		 
+				 
         }
  
     	
-    
-    
-
     @AfterMethod
     public void tearDown() {
         // Close the browser

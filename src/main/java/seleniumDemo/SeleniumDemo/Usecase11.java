@@ -10,13 +10,16 @@ import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
 import org.apache.commons.io.FileUtils;
+import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.NoAlertPresentException;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -87,6 +90,8 @@ public class Usecase11 {
 
         // Print the total number of unique links on the main page
         System.out.println("Total number of unique links on the main page: " + uniqueLinks.size());
+        // Print each link
+        
 
         // Initialize root to null
         TreeNode root = null;
@@ -96,6 +101,7 @@ public class Usecase11 {
         for (String linkUrl : uniqueLinks) {
             // Add your condition to skip links here
             if (shouldSkipLink(linkUrl)) {
+            	
                 System.out.println(linkCount + ". Skipping link: " + linkUrl);
                 continue; // Skip to the next iteration
             }
@@ -110,10 +116,12 @@ public class Usecase11 {
             for (String handle : driver.getWindowHandles()) {
                 driver.switchTo().window(handle);
             }
+            driver.switchTo().window(originalHandle);
 
             try {
                 // Navigate to the link URL
                 driver.get(linkUrl);
+                WebDriverWait wait = new WebDriverWait(driver, 10); 
 
                 // Check if the page has loaded properly
                 if (isAboutBlank()) {
@@ -148,6 +156,13 @@ public class Usecase11 {
 
                             // Recursively click on the next links
                             clickAndPrintLinksRecursive(currentChildNode, driver, originalHandle);
+                            try {
+                                Alert alert = driver.switchTo().alert();
+                                alert.dismiss(); // or alert.accept();
+                            } catch (NoAlertPresentException e) {
+                                // No alert present
+                            }
+
                         }
                     }
                 }
@@ -227,8 +242,9 @@ public class Usecase11 {
     private boolean shouldSkipLink(String linkUrl) {
         // Add your condition to skip links based on the URL
         // Example: Skip links containing "mailto:info@rnt.ai"
-        return linkUrl.contains("mailto:info@rnt.ai");
+        return linkUrl != null && linkUrl.contains("mailto:info@rnt.ai");
     }
+
 
     private boolean isValidLink(String linkUrl) {
         // Check if the URL is valid and not empty

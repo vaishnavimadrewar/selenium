@@ -3,13 +3,13 @@
 <suite name="Failed suite [Default suite]" guice-stage="DEVELOPMENT">
   <test thread-count="5" name="Default test(failed)">
     <classes>
-      <class name="seleniumDemo.SeleniumDemo.Test2">
+      <class name="seleniumDemo.SeleniumDemo.TreeTest4">
         <methods>
-          <include name="close"/>
-          <include name="clickOnSpecificLink"/>
+          <include name="tearDown"/>
           <include name="setUp"/>
+          <include name="testCase1"/>
         </methods>
-      </class> <!-- seleniumDemo.SeleniumDemo.Test2 -->
+      </class> <!-- seleniumDemo.SeleniumDemo.TreeTest4 -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->

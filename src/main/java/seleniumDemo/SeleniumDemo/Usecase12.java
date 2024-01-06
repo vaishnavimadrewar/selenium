@@ -67,14 +67,13 @@ public class Usecase12 {
         driver.manage().timeouts().implicitlyWait(1000, TimeUnit.SECONDS);
 
         // Redirect console output to a file
-        try {
-            outputFile = new File("C:\\Users\\Vaishnavi Madrewar\\Desktop\\console_WebsiteOutput2.txt");
-            console = new PrintStream(new FileOutputStream(outputFile));
-            System.setOut(console);
-            System.setErr(console);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+		/*
+		 * try { outputFile = new
+		 * File("C:\\Users\\Vaishnavi Madrewar\\Desktop\\console_WebsiteOutput2.txt");
+		 * console = new PrintStream(new FileOutputStream(outputFile));
+		 * System.setOut(console); System.setErr(console); } catch (IOException e) {
+		 * e.printStackTrace(); }
+		 */
 
         visitedLinks = new HashSet<>();
     }
@@ -218,7 +217,7 @@ public class Usecase12 {
 
     private boolean isAboutBlank() {
         // Check if the current page has a title of "about:blank"
-        return driver.getTitle().equals("about:blank");
+         return driver.getTitle().equals("about:blank");
     }
 
     private boolean is404Error() {
@@ -246,9 +245,8 @@ public class Usecase12 {
     public void tearDown() {
         // Close the browser
         driver.quit();
-        // Close the console output file
-        if (console != null) {
-            console.close();
-        }
+		/*
+		 * // Close the console output file if (console != null) { console.close(); }
+		 */
     }
 }
